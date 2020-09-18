@@ -1,5 +1,11 @@
 import Vue from 'vue/dist/vue.common.js'
-import Vuex, { mapState, mapMutations, mapGetters, mapActions, createNamespacedHelpers } from '../../dist/vuex.common.js'
+import Vuex, {
+  mapState,
+  mapMutations,
+  mapGetters,
+  mapActions,
+  createNamespacedHelpers
+} from '../../dist/vuex.common.js'
 
 describe('Helpers', () => {
   it('mapState (array)', () => {
@@ -8,6 +14,9 @@ describe('Helpers', () => {
         a: 1
       }
     })
+
+
+
     const vm = new Vue({
       store,
       computed: mapState(['a'])
@@ -44,7 +53,9 @@ describe('Helpers', () => {
       modules: {
         foo: {
           namespaced: true,
-          state: { a: 1 },
+          state: {
+            a: 1
+          },
           getters: {
             b: state => state.a + 1
           }
@@ -63,7 +74,9 @@ describe('Helpers', () => {
     store.state.foo.a++
     expect(vm.a).toBe(5)
     store.replaceState({
-      foo: { a: 3 }
+      foo: {
+        a: 3
+      }
     })
     expect(vm.a).toBe(7)
   })
@@ -74,10 +87,14 @@ describe('Helpers', () => {
       modules: {
         foo: {
           namespaced: true,
-          state: { a: 1 },
+          state: {
+            a: 1
+          },
           modules: {
             bar: {
-              state: { b: 2 }
+              state: {
+                b: 2
+              }
             }
           }
         }
@@ -100,7 +117,9 @@ describe('Helpers', () => {
       modules: {
         foo: {
           namespaced: true,
-          state: { a: 1 }
+          state: {
+            a: 1
+          }
         }
       }
     })
@@ -114,7 +133,9 @@ describe('Helpers', () => {
 
   it('mapMutations (array)', () => {
     const store = new Vuex.Store({
-      state: { count: 0 },
+      state: {
+        count: 0
+      },
       mutations: {
         inc: state => state.count++,
         dec: state => state.count--
@@ -132,7 +153,9 @@ describe('Helpers', () => {
 
   it('mapMutations (object)', () => {
     const store = new Vuex.Store({
-      state: { count: 0 },
+      state: {
+        count: 0
+      },
       mutations: {
         inc: state => state.count++,
         dec: state => state.count--
@@ -153,9 +176,11 @@ describe('Helpers', () => {
 
   it('mapMutations (function)', () => {
     const store = new Vuex.Store({
-      state: { count: 0 },
+      state: {
+        count: 0
+      },
       mutations: {
-        inc (state, amount) {
+        inc(state, amount) {
           state.count += amount
         }
       }
@@ -163,7 +188,7 @@ describe('Helpers', () => {
     const vm = new Vue({
       store,
       methods: mapMutations({
-        plus (commit, amount) {
+        plus(commit, amount) {
           commit('inc', amount + 1)
         }
       })
@@ -177,7 +202,9 @@ describe('Helpers', () => {
       modules: {
         foo: {
           namespaced: true,
-          state: { count: 0 },
+          state: {
+            count: 0
+          },
           mutations: {
             inc: state => state.count++,
             dec: state => state.count--
@@ -203,9 +230,11 @@ describe('Helpers', () => {
       modules: {
         foo: {
           namespaced: true,
-          state: { count: 0 },
+          state: {
+            count: 0
+          },
           mutations: {
-            inc (state, amount) {
+            inc(state, amount) {
               state.count += amount
             }
           }
@@ -215,7 +244,7 @@ describe('Helpers', () => {
     const vm = new Vue({
       store,
       methods: mapMutations('foo', {
-        plus (commit, amount) {
+        plus(commit, amount) {
           commit('inc', amount + 1)
         }
       })
@@ -230,7 +259,9 @@ describe('Helpers', () => {
       modules: {
         foo: {
           namespaced: true,
-          state: { count: 0 },
+          state: {
+            count: 0
+          },
           mutations: {
             inc: state => state.count++,
             dec: state => state.count--
@@ -249,14 +280,20 @@ describe('Helpers', () => {
 
   it('mapGetters (array)', () => {
     const store = new Vuex.Store({
-      state: { count: 0 },
+      state: {
+        count: 0
+      },
       mutations: {
         inc: state => state.count++,
         dec: state => state.count--
       },
       getters: {
-        hasAny: ({ count }) => count > 0,
-        negative: ({ count }) => count < 0
+        hasAny: ({
+          count
+        }) => count > 0,
+        negative: ({
+          count
+        }) => count < 0
       }
     })
     const vm = new Vue({
@@ -276,14 +313,20 @@ describe('Helpers', () => {
 
   it('mapGetters (object)', () => {
     const store = new Vuex.Store({
-      state: { count: 0 },
+      state: {
+        count: 0
+      },
       mutations: {
         inc: state => state.count++,
         dec: state => state.count--
       },
       getters: {
-        hasAny: ({ count }) => count > 0,
-        negative: ({ count }) => count < 0
+        hasAny: ({
+          count
+        }) => count > 0,
+        negative: ({
+          count
+        }) => count < 0
       }
     })
     const vm = new Vue({
@@ -309,14 +352,20 @@ describe('Helpers', () => {
       modules: {
         foo: {
           namespaced: true,
-          state: { count: 0 },
+          state: {
+            count: 0
+          },
           mutations: {
             inc: state => state.count++,
             dec: state => state.count--
           },
           getters: {
-            hasAny: ({ count }) => count > 0,
-            negative: ({ count }) => count < 0
+            hasAny: ({
+              count
+            }) => count > 0,
+            negative: ({
+              count
+            }) => count < 0
           }
         }
       }
@@ -347,20 +396,30 @@ describe('Helpers', () => {
           modules: {
             bar: {
               namespaced: true,
-              state: { count: 0 },
+              state: {
+                count: 0
+              },
               mutations: {
                 inc: state => state.count++,
                 dec: state => state.count--
               },
               getters: {
-                hasAny: ({ count }) => count > 0,
-                negative: ({ count }) => count < 0
+                hasAny: ({
+                  count
+                }) => count > 0,
+                negative: ({
+                  count
+                }) => count < 0
               }
             },
             cat: {
-              state: { count: 9 },
+              state: {
+                count: 9
+              },
               getters: {
-                count: ({ count }) => count
+                count: ({
+                  count
+                }) => count
               }
             }
           }
@@ -398,14 +457,20 @@ describe('Helpers', () => {
       modules: {
         foo: {
           namespaced: true,
-          state: { count: 0 },
+          state: {
+            count: 0
+          },
           mutations: {
             inc: state => state.count++,
             dec: state => state.count--
           },
           getters: {
-            hasAny: ({ count }) => count > 0,
-            negative: ({ count }) => count < 0
+            hasAny: ({
+              count
+            }) => count > 0,
+            negative: ({
+              count
+            }) => count < 0
           }
         }
       }
@@ -465,12 +530,14 @@ describe('Helpers', () => {
   it('mapActions (function)', () => {
     const a = jasmine.createSpy()
     const store = new Vuex.Store({
-      actions: { a }
+      actions: {
+        a
+      }
     })
     const vm = new Vue({
       store,
       methods: mapActions({
-        foo (dispatch, arg) {
+        foo(dispatch, arg) {
           dispatch('a', arg + 'bar')
         }
       })
@@ -513,14 +580,16 @@ describe('Helpers', () => {
       modules: {
         foo: {
           namespaced: true,
-          actions: { a }
+          actions: {
+            a
+          }
         }
       }
     })
     const vm = new Vue({
       store,
       methods: mapActions('foo/', {
-        foo (dispatch, arg) {
+        foo(dispatch, arg) {
           dispatch('a', arg + 'bar')
         }
       })
@@ -558,7 +627,9 @@ describe('Helpers', () => {
       modules: {
         foo: {
           namespaced: true,
-          state: { count: 0 },
+          state: {
+            count: 0
+          },
           getters: {
             isEven: state => state.count % 2 === 0
           },
